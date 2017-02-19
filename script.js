@@ -44,12 +44,23 @@ $('.clear-cart').on('click', function () {
   clearCart();
 });
 
+$('.add-item').on('click', function(){
+  $('.object-addin-form').empty();
+  $('.object-addin-form').append(
+    '<div class="container" style="text-align: center"><form><p>Item name: <input type="text" id="item-name" placeholder="Item Name" /></p><p>Price: <input type="number" id="item-price" placeholder="Item Price" /></p><p>Image URL: <input type="url" id="item-url" placeholder="URL of Items Picture" /></p><button type="button" onclick="addItemFunc();">Submit</button><div id="msg"></div></form></div>'
+    );
+});
+
 var addItemFunc = function () {
   var item_name = $('#item-name').val();
   var item_price = $('#item-price').val();
   var item_url = $('#item-url').val();
 
   app.addObject(item_name, item_price, item_url);
+
+  $('.object-addin-form').empty();
+  app.updateStore();
+
 };
 
 var RenderStore = function () {
@@ -64,6 +75,7 @@ var RenderStore = function () {
   };
 
   var updateStore = function () {
+    $('.new-row').empty();
     for (i=0; i<addedObjects.length; i++) {
       $('.new-row').append (
         '<div class="col-md-4"> <div class="card-container"> <div class="card item" item data-name="'+addedObjects[i].item+'" data-price="'+addedObjects[i].price+'"> <div class="pricebox"> <p class="price"> $'+addedObjects[i].price+' </p> </div> <div class="buybox"> <p class="add-to-cart"> ADD TO CART </p> </div> <div class="card-inner"> <img src="'+addedObjects[i].url+'" class="proimage"> </div> </div> </div> </div>'
