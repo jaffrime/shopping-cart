@@ -32,7 +32,8 @@ $('.view-cart').on('click', function () {
   $(".shopping-cart").toggle(".show");
 });
 
-$('.add-to-cart').on('click', function () {
+// $('.add-to-cart').on('click', function () {
+$(document).on('click', '.add-to-cart', function () {
   // TODO: get the "item" object from the page
   var item = $(this).closest('.item').data();
   //console.log(item);
@@ -60,7 +61,6 @@ var addItemFunc = function () {
 
   $('.object-addin-form').empty();
   app.updateStore();
-
 };
 
 var RenderStore = function () {
