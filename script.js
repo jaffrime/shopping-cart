@@ -1,6 +1,5 @@
 // an array with all of our cart items
 var cart = [];
-// var addedObjects = [{item: 'keys', price: 20, url: 'http://www.gerritbrands.com/sites/default/files/post-images/keys.jpg'}];
 
 var updateCart = function () {
   // TODO: finish
