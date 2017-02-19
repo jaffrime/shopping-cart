@@ -6,8 +6,8 @@ var updateCart = function () {
   $('.cart-list').empty();
   var tmpTotal = 0;
   for (i=0; i<cart.length; i++) {
-    $('.cart-list').append('<p>' + cart[i].name + ": $" + cart[i].price + '</p>');
-    tmpTotal += cart[i].price;
+    $('.cart-list').append('<p>' + cart[i].name + ': $' + cart[i].price + ' (x' + cart[i].occurrence + ') = $' + (cart[i].price*cart[i].occurrence) + ' </p>');
+    tmpTotal += (cart[i].price * cart[i].occurrence);
   }
   //console.log(tmpTotal);
   $('.total').text(tmpTotal);
@@ -16,7 +16,18 @@ var updateCart = function () {
 
 var addItem = function (item) {
   // TODO: finish
-  cart.push(item);
+  var itemPresent = false;
+  for (i=0; i<cart.length; i++) {
+    if (cart[i].name === item.name) {
+      cart[i].occurrence += 1;
+      itemPresent = true;
+    }
+  }
+  if (!itemPresent) {
+    // adding occurrence value
+    item.occurrence = 1;
+    cart.push(item);
+  }
   //console.log(cart);
 }
 
