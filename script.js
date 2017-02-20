@@ -56,10 +56,16 @@ $('.clear-cart').on('click', function () {
 });
 
 $('.add-item').on('click', function(){
+  $('h4').append('<h6><a href="#" class="cancel-add-item"> (or cancel)</a></h6>')
   $('.object-addin-form').empty();
   $('.object-addin-form').append(
     '<div class="container" style="text-align: center"><form><p>Item name: <input type="text" id="item-name" placeholder="Item Name" /></p><p>Price: <input type="number" id="item-price" placeholder="Item Price" /></p><p>Image URL: <input type="url" id="item-url" placeholder="URL of Items Picture" /></p><button type="button" onclick="addItemFunc();">Submit</button><div id="msg"></div></form></div>'
     );
+});
+
+$('.page-header').on('click', '.cancel-add-item', function(){
+  $('.object-addin-form').empty();
+  $('.cancel-add-item').closest('h6').remove();
 });
 
 var addItemFunc = function () {
@@ -73,6 +79,7 @@ var addItemFunc = function () {
   app.updateStore();
 };
 
+// modular approach
 var RenderStore = function () {
   var addedObjects = [];
 
