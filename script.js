@@ -6,7 +6,7 @@ var updateCart = function () {
   $('.cart-list').empty();
   var tmpTotal = 0;
   for (i=0; i<cart.length; i++) {
-    $('.cart-list').append('<p>' + cart[i].name + ': $' + cart[i].price + ' (x' + cart[i].occurrence + ') = $' + (cart[i].price*cart[i].occurrence) + ' </p>');
+    $('.cart-list').append('<p data-name="' + cart[i].name + '">' + cart[i].name + ': $' + cart[i].price + ' (x' + cart[i].occurrence + ') = $' + (cart[i].price*cart[i].occurrence) + ' <button class="btn btn-danger btn-xs remove-item">Remove Item</button> </p>');
     tmpTotal += (cart[i].price * cart[i].occurrence);
   }
   //console.log(tmpTotal);
@@ -37,6 +37,16 @@ var clearCart = function () {
   updateCart();
 }
 
+var removeItem = function (removePar) {
+  //receiving <p> of item to remove
+  for (i=0; i<cart.length; i++) {
+    if (removePar.data().name === cart[i].name) {
+      cart.splice(i,1);
+    }
+  }
+  updateCart();
+}
+
 $('.view-cart').on('click', function () {
   // TODO: hide/show the shopping cart!
   $(".shopping-cart").toggle(".show");
@@ -53,6 +63,12 @@ $(document).on('click', '.add-to-cart', function () {
 
 $('.clear-cart').on('click', function () {
   clearCart();
+});
+
+$('.shopping-cart').on('click', '.remove-item', function(){
+  //alert($(this).closest('p').data().name);
+  var $removePar = $(this).closest('p');
+  removeItem($removePar);
 });
 
 $('.add-item').on('click', function(){
